@@ -25,6 +25,8 @@ jobs:
       - name: Lint with flake8
         run: flake8 .
 
+      - name: Set PYTHONPATH
+	 run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
   test:
     runs-on: ubuntu-latest
     needs: lint
