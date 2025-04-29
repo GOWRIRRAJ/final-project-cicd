@@ -5,7 +5,7 @@ metadata:
 spec:
   steps:
     - name: cleanup
-      image: alpine
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/alphine:latest
       script: |
         #!/bin/sh
         echo "Cleaning up workspace..."
@@ -19,9 +19,8 @@ metadata:
 spec:
   steps:
     - name: run-nose-tests
-      image: python:3.9
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/alphine:latest
       script: |
-        #!/bin/bash
+        #!/bin/sh
         pip install nose
-        nosetests
-
+        nosetests tests/

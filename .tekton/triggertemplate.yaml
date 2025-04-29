@@ -1,0 +1,25 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: github-template
+spec:
+  params:
+    - name: gitrepositoryurl
+    - name: gitrevision
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: cicd-pipeline-run-
+      spec:
+        pipelineRef:
+          name: cicd-pipeline
+        workspaces:
+          - name: shared-workspace
+            emptyDir: {}
+        params:
+          - name: gitrepositoryurl
+            value: $(params.gitrepositoryurl)
+          - name: gitrevision
+            value: $(params.gitrevision)
+
