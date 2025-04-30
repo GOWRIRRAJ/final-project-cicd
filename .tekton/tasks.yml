@@ -1,15 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: cleanup
+  name: cleanup-task
 spec:
   steps:
-    - name: cleanup
-      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/python:3.8
+    - name: clean-up
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/ubuntu:latest
       script: |
         #!/bin/sh
-        echo "Cleaning up workspace..."
-        rm -rf /workspace/*
+        echo "Cleaning up resources"
+        rm -rf /workspace/shared-workspace/*
 
 ---
 apiVersion: tekton.dev/v1beta1
@@ -23,4 +23,4 @@ spec:
       script: |
         #!/bin/sh
         pip install nose
-        nosetests tests/
+        nosetests /workspace/shared-workspace/tests

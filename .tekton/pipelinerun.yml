@@ -6,7 +6,6 @@ metadata:
 spec:
   pipelineRef:
     name: cicd-pipeline
-  timeout: 10m
   workspaces:
     - name: shared-workspace
       volumeClaimTemplate:

@@ -3,32 +3,13 @@ kind: Pipeline
 metadata:
   name: cicd-pipeline
 spec:
-  workspaces:
-    - name: shared-workspace
   tasks:
-    - name: cleanup
+    - name: lint-task
       taskRef:
-        name: cleanup
-
-    - name: clone-source
+        name: lint-task
+    - name: test-task
       taskRef:
-        name: git-clone
-      runAfter:
-        - cleanup
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-      params:
-        - name: url
-          value: https://github.com/Gowrirraj/final-project-cicd.git
-        - name: deleteExisting
-          value: "true"
-
-    - name: nose-test
+        name: test-task
+    - name: cleanup-task
       taskRef:
-        name: nose-test
-      runAfter:
-        - clone-source
-      workspaces:
-        - name: shared-workspace
-          workspace: shared-workspace
+        name: cleanup-task
