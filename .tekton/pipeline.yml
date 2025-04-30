@@ -9,15 +9,26 @@ spec:
     - name: cleanup
       taskRef:
         name: cleanup
+
+    - name: clone-source
+      taskRef:
+        name: git-clone
+      runAfter:
+        - cleanup
       workspaces:
-        - name: shared-workspace
+        - name: output
           workspace: shared-workspace
+      params:
+        - name: url
+          value: https://github.com/Gowrirraj/final-project-cicd.git
+        - name: deleteExisting
+          value: "true"
 
     - name: nose-test
       taskRef:
         name: nose-test
       runAfter:
-        - cleanup
+        - clone-source
       workspaces:
         - name: shared-workspace
           workspace: shared-workspace

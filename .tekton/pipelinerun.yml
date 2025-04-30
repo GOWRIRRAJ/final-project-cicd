@@ -1,8 +1,20 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: final-project-run
+  name: cicd-pipeline-run
+  namespace: cicd
 spec:
   pipelineRef:
-    name: final-project-pipeline
-
+    name: cicd-pipeline
+  timeout: 10m
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        metadata:
+          name: shared-pvc
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
