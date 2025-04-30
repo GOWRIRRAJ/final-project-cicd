@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: nose-test-task
+  namespace: cicd
+spec:
+  steps:
+    - name: run-unittests
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/python:3.8
+      script: |
+        #!/bin/bash
+        pip install unittest2
+        export PYTHONPATH=$(pwd)/tests
+        python -m unittest discover -s tests -p "*.py"

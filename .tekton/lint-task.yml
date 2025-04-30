@@ -1,0 +1,15 @@
+# .tekton/lint-task.yml
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: lint-task
+  namespace: cicd
+spec:
+  steps:
+    - name: run-flake8
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/python:3.8
+      workingDir: /workspace/source
+      script: |
+        #!/bin/bash
+        pip install flake8
+        flake8 . --exclude=/usr

@@ -1,15 +1,20 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: cicd-pipeline
+  namespace: cicd
 spec:
   tasks:
-    - name: lint-task
+    - name: lint
       taskRef:
         name: lint-task
-    - name: test-task
+    - name: nose-test
       taskRef:
-        name: test-task
-    - name: cleanup-task
+        name: nose-test-task
+      runAfter:
+        - lint
+    - name: cleanup
       taskRef:
         name: cleanup-task
+      runAfter:
+        - nose-test

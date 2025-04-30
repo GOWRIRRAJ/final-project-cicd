@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/ubuntu:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
           flake8 .
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/ubuntu:latest
     needs: lint
     steps:
       - name: Checkout code

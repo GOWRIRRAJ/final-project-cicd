@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: cleanup-task
+  namespace: cicd
+spec:
+  steps:
+    - name: cleanup
+      image: harbor-core-doc-common-svc.apps.as0096.tre.nsn-rdnet.net/flowone/alphine:latest
+      script: |
+        #!/bin/sh
+        echo "Running cleanup..."
+        rm -rf /workspace/output || true
