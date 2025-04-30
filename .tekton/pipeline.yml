@@ -3,14 +3,21 @@ kind: Pipeline
 metadata:
   name: cicd-pipeline
 spec:
+  workspaces:
+    - name: shared-workspace
   tasks:
     - name: cleanup
       taskRef:
         name: cleanup
+      workspaces:
+        - name: shared-workspace
+          workspace: shared-workspace
 
     - name: nose-test
       taskRef:
         name: nose-test
       runAfter:
         - cleanup
-
+      workspaces:
+        - name: shared-workspace
+          workspace: shared-workspace
